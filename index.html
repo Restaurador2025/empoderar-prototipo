@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Em poder AR - Prototipo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .zona, .acciones, .estado {
+      background: #fff;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    button {
+      margin: 5px;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Em poder AR</h1>
+
+  <div class="zona">
+    <h2>Zona Actual</h2>
+    <p><strong>Barrio:</strong> San Martín</p>
+    <p><strong>Trabajo:</strong> Fábrica Siderúrgica</p>
+    <p><strong>Estudio:</strong> Escuela Técnica Nº1</p>
+  </div>
+
+  <div class="acciones">
+    <h2>Acciones del Día</h2>
+    <button onclick="accion('Organizaste una reunión con vecinos')">Reunión Vecinal</button>
+    <button onclick="accion('Participaste en una marcha gremial')">Marcha Gremial</button>
+    <button onclick="accion('Faltaste a una asamblea estudiantil')">No Fuiste a Asamblea</button>
+    <button onclick="accion('Ayudaste en el comedor comunitario')">Comedor Comunitario</button>
+    <p id="accionesRealizadas"></p>
+  </div>
+
+  <div class="estado">
+    <h2>Estado Actual</h2>
+    <p id="estado"></p>
+  </div>
+
+  <script>
+    let acciones = 0;
+    let reputacion = 50;
+
+    function accion(texto) {
+      if (acciones >= 4) {
+        alert("Ya usaste tus 4 acciones del día");
+        return;
+      }
+      acciones++;
+      document.getElementById("accionesRealizadas").innerHTML += `👉 ${texto}<br>`;
+
+      if (texto.includes("comedor")) reputacion += 5;
+      if (texto.includes("march")) reputacion += 3;
+      if (texto.includes("faltaste")) reputacion -= 7;
+
+      document.getElementById("estado").innerText = `Reputación actual: ${reputacion}/100`;
+    }
+  </script>
+</body>
+</html>
